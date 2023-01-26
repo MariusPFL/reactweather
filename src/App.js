@@ -52,7 +52,7 @@ function App() {
       }
     }
   }
-  function submitDaCity(){
+  function getWeatherFromCity(){
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + APIKEY)
     .then(res => res.json())
     .then(data => setWeatherData(data));
@@ -82,17 +82,17 @@ function App() {
     setIsForecastSucceeded(false);
   }
 
-  function findWeatherByDate(date, dataList) {
-    dataList.map(item => {
-      if(item.dt === date){
-        return "something found bitch";
-        return item;
-      }
-      else{
-        return "nothing found bitch";
-      }
-    })
-  }
+  // Obsolete
+  // function findWeatherByDate(date, dataList) {
+  //   dataList.map(item => {
+  //     if(item.dt === date){
+  //       return item;
+  //     }
+  //     else{
+  //       return "nothing found";
+  //     }
+  //   })
+  // }
 
   function getForecast(){
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + APIKEY)
@@ -124,7 +124,7 @@ function App() {
       {/* {isSubmitted ? <p>{() => {var currentDate = new Date();alert(currentDate.getHours());return currentDate.getHours() + ":" + currentDate.getMinutes() + ":";}}</p> : ""} */}
       <h4>{isSubmitted ? "" :  "Tippe deine Stadt ein"}</h4>
       <input id="tbcityname" type="textbox" onChange={changeCity} value={cityName} placeholder="Enter your city here..."></input>
-      <button onClick={submitDaCity}>Search</button>
+      <button onClick={getWeatherFromCity}>Search</button>
       {isSubmitted ?     
       <div>
       <div>
