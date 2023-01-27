@@ -1,4 +1,139 @@
-.TestStyle{
+/*
+* Variables
+*/
+
+$turkis: #29b9cf;
+$white: #ffffff;
+$cornerRadius: 8px;
+$marginTop: 20px;
+
+// Copied Style from CSS
+
+.App {
     text-align: center;
-    background-image: url("https://img.freepik.com/free-vector/dark-clouds-with-rainfall-thunder-flash-background_1017-32181.jpg?w=2000");
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+
+body {
+    margin-top: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: $white;
+    background-image: url("https://img.freepik.com/free-vector/turquoise-galaxy-background_125540-343.jpg?w=2000");
+    background-size: 100%, 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+    }
+
+
+    /* Own SASS Styles
+    ------------------------------------------------
+    */
+
+.TestStyle{
+    // background-color: $turkis;
+}
+
+.infostyle{
+    margin-top: 10px;
+    border: #282c34;
+    color : $white;
+    &--small{
+        font-size: 15px;
+    }
+    &--normal{
+        font-size: 30px;
+    }
+}
+.infostyle--big{
+    @extend .infostyle;
+    font-size: 45px;
+}
+
+.infostyle--normal{
+    @extend.infostyle;
+    font-size: 30px;
+}
+
+.transparentblack{
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.wheaterimage {
+    height: 200px;
+    width: 200px;
+}
+
+.wheaterbutton {
+    font-size: 20px;
+    color : $white;
+    background-color: transparent;
+    border-color: $white;
+    border-width: 3px;
+    border-radius: $cornerRadius;
+    .pressed{
+        
+    }
+}
+
+.infobutton{
+    margin-top: $marginTop;
+    color: white;
+    background-color: transparent;
+    border-width: 0px;
+    font-size: 30px;
+}
+
+.input{
+    margin-top: $marginTop;
+    border-color: transparent;
+    border-radius: $cornerRadius;
+    font-size: 20px;
+}
+
+nav {
+    background-color: rgba(0, 0, 0, 0.5);;
 }

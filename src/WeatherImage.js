@@ -12,47 +12,47 @@ export default function WeatherImage(props) {
     switch(props.weatherDescription) {
         case 'Clouds':
             return (
-                <img src={CloudyImg} />
+                <img className='wheaterimage' src={CloudyImg} />
             )
             break;
         case 'Foggy':
             return (
-                <img src={FoggyImg} />
+                <img className='wheaterimage' src={FoggyImg} />
             )
             break;
         case 'Rain':
             return (
-                <img src={RainImg} />
+                <img className='wheaterimage' src={RainImg} />
             )
             break;
         case 'Snow':
             return (
-                <img src={Snowflake} />
+                <img className='wheaterimage' src={Snowflake} />
             )
             break;
         case 'Clear':
             return (
-                <img src={SunImg} />
+                <img className='wheaterimage' src={SunImg} />
             )
             break;
         case 'Drizzle':
             return (
-                <img src={RainImg} />
+                <img className='wheaterimage' src={RainImg} />
             )
         break;
         case 'Mist':
             return(
-                <img src={FoggyImg} />
+                <img className='wheaterimage' src={FoggyImg} />
             )
         break;
         case 'Fog':
             return(
-                <img src={FoggyImg} />
+                <img className='wheaterimage' src={FoggyImg} />
             )
         break;
         case 'Haze':
             return(
-                <img src={FoggyImg} />
+                <img className='wheaterimage' src={FoggyImg} />
             )
         break;
         default:

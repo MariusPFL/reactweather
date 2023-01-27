@@ -21,13 +21,13 @@ export default function WeatherInfoDisplay(props){
         }
       }
     return(
-        <div>
-            <h1>Weather Info</h1>
-            <h2 toolTip="Change the Format to Celsius or Fahrenheit" onClick={() => setMetricFormat(prevFormatCelsius => !prevFormatCelsius)}>{metricFormat ? "F" : "C"}</h2>
-            <p>Temp: {inCorrectFormatTemp(props.weatherData.main.temp)} Real Feel: {inCorrectFormatTemp(props.weatherData.main.feels_like)}</p>
-            <p>↓ {inCorrectFormatTemp(props.weatherData.main.temp_min)}  -  ↑ {inCorrectFormatTemp(props.weatherData.main.temp_max)}</p>
-            <p>Wind: {inCorrectFormatSpeed(props.weatherData.wind.speed)} | pressure: {props.weatherData.main.pressure} | humidity: {props.weatherData.main.humidity}%</p>
-            <p>{props.weatherData.weather[0].main}</p>
+        <div className='transparentblack'>
+            <h1 className='infostyle--big'>Weather Info</h1>
+            <button className='wheaterbutton' toolTip="Change the Format to Celsius or Fahrenheit" onClick={() => setMetricFormat(prevFormatCelsius => !prevFormatCelsius)}>{metricFormat ? "Imperial" : "Metric"}</button>
+            <p className='infostyle--normal'>Temp: {inCorrectFormatTemp(props.weatherData.main.temp)} Real Feel: {inCorrectFormatTemp(props.weatherData.main.feels_like)}</p>
+            <p className='infostyle--normal'>↓ {inCorrectFormatTemp(props.weatherData.main.temp_min)}  -  ↑ {inCorrectFormatTemp(props.weatherData.main.temp_max)}</p>
+            <p className='infostyle--normal'>Wind: {inCorrectFormatSpeed(props.weatherData.wind.speed)} | pressure: {props.weatherData.main.pressure} | humidity: {props.weatherData.main.humidity}%</p>
+            <p className='infostyle--normal'>{props.weatherData.weather[0].main}</p>
             <WeatherImage weatherDescription={props.weatherData.weather[0].main}/>
       </div>
     )

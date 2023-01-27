@@ -5,7 +5,7 @@ export default function Select(props){
     try {
         let index = 0;
         return(
-            <select name="forecast" id="forecast">
+            <select className='input' name="forecast" id="forecast">
             {
               props.forecastData.list.map(dailyweather => {
                 // Just one entry a day should be showed

@@ -132,30 +132,29 @@ function App() {
     <div className="TestStyle">
       <Navbar />
       {isSubmitted ? <p>Last Update: {lastUpdated}</p> : ""}
-      <h4>{isSubmitted ? "" :  "Tippe deine Stadt ein"}</h4>
-      <input id="tbcityname" type="textbox" onChange={changeCity} value={cityName} placeholder="Enter your city here..."></input>
-      <button onClick={getWeatherFromCity}>Search</button>
+      <h4 className='infostyle--small'>{isSubmitted ? "" :  "Tippe deine Stadt ein"}</h4>
+      <input className='input' id="tbcityname" type="textbox" onChange={changeCity} value={cityName} placeholder="Enter your city here..."></input>
+      <button className='wheaterbutton' onClick={getWeatherFromCity}>Search</button>
       {isSubmitted ?     
       <div>
-
       <div>
         <a href={"https://www.google.ch/maps/place/" + cityName}>
-          <button className='information'>Results for {weatherData.name} {weatherData.sys.country} | {weatherData.coord.lat} : {weatherData.coord.lon}</button>
+          <button className='infobutton'>Results for {weatherData.name} {weatherData.sys.country} | {weatherData.coord.lat} : {weatherData.coord.lon}</button>
         </a>
       </div>
 
       <WeatherInfoDisplay weatherData={weatherData} />
-
-      <p onClick={() => setMetricFormat(prevMetricFormat => !prevMetricFormat)}>☀ ↑ {getTimeFromTimestampHoursMinutes(weatherData.sys.sunrise)}</p>
-      <p onClick={() => setMetricFormat(prevMetricFormat => !prevMetricFormat)}>☀ ↓ {getTimeFromTimestampHoursMinutes(weatherData.sys.sunset)}</p>
+      <h1 className='infostyle--big'>Sun Times</h1>
+      <p className='infostyle--normal' onClick={() => setMetricFormat(prevMetricFormat => !prevMetricFormat)}>☀ ↑ {getTimeFromTimestampHoursMinutes(weatherData.sys.sunrise)}</p>
+      <p className='infostyle--normal' onClick={() => setMetricFormat(prevMetricFormat => !prevMetricFormat)}>☀ ↓ {getTimeFromTimestampHoursMinutes(weatherData.sys.sunset)}</p>
       </div>
       : ""}
-      <h2 onClick={getForecast}>{isForecastSucceeded ? "Reload Forecast" : "Get Forecast"}</h2>
+      <button className='wheaterbutton' onClick={getForecast}>{isForecastSucceeded ? "Reload Forecast" : "Get Forecast"}</button>
       <div>
       {isForecastSucceeded ? 
       <div>
         <Select forecastData={forecastData}/>
-    <button onClick={() => {
+    <button className='wheaterbutton' onClick={() => {
       if(!isForecastActive){
         setIsForecastActive(true)
         setActiveForecastIndex(document.getElementById("forecast").value);
