@@ -18,24 +18,26 @@ function App() {
   const [lastUpdated, setLastUpdated] = React.useState();
   const [metricFormat, setMetricFormat] = React.useState(true);
 
-  function changeCity(event) {
+  function ChangeCity(event) {
     setCityName(event.target.value);
   }
   
-  function UpdateLastUpdated(){
-    setLastUpdated(getTimeFromTimestampHoursMinutes(Date.now()))
-  }
-
-  function getTimeFromTimestampHoursMinutes(timestamp){
-    var date = new Date(timestamp * 1000);
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
+  function GetTimeFormat(hours, minutes){
+    if(hours < 10){
+      hours = "0" + hours;
+    }
+    if(minutes < 10){
+      minutes = "0" + minutes;
+    }
     if(metricFormat){
       return hours + ":" + minutes;
     }
     else{
       if(hours > 12){
         hours = hours - 12;
+        if(hours < 10){
+          hours = "0" + hours;
+        }
         return hours + ":" + minutes + " PM";
       }
       else{
@@ -43,11 +45,26 @@ function App() {
       }
     }
   }
-  function getWeatherFromCity(){
+
+  function UpdateLastUpdated(){
+    var date = new Date();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    setLastUpdated(GetTimeFormat(hours, minutes));
+  }
+
+  function GetTimeFromTimestampHoursMinutes(timestamp){
+    var date = new Date(timestamp * 1000);
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    return GetTimeFormat(hours, minutes);
+  }
+  
+  function GetWeatherFromCity(){
+    setIsSubmitted(false);
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + APIKEY)
     .then(res => res.json())
     .then(data => setWeatherData(data));
-    setIsSubmitted(false);
     switch (weatherData.cod) {
       case 200:
         setIsSubmitted(true);        
@@ -70,7 +87,7 @@ function App() {
     UpdateLastUpdated();
   }
 
-  function getForecast(){
+  function GetForecast(){
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + APIKEY)
     .then(res => res.json())
     .then(data => setForecastData(data));
@@ -99,8 +116,8 @@ function App() {
       <Navbar />
       {isSubmitted ? <p>Last Update: {lastUpdated}</p> : ""}
       <p className='infostyle--normal'>{isSubmitted ? "" :  "Tippe deine Stadt ein"}</p>
-      <input className='input' id="tbcityname" type="textbox" onChange={changeCity} value={cityName} placeholder="Enter your city here..."></input>
-      <button className='wheaterbutton' onClick={getWeatherFromCity}>Search</button>
+      <input className='input' id="tbcityname" type="textbox" onChange={ChangeCity} value={cityName} placeholder="Enter your city here..."></input>
+      <button className='wheaterbutton' onClick={GetWeatherFromCity}>Search</button>
       {isSubmitted ?     
       <div>
       <div>
@@ -111,11 +128,11 @@ function App() {
 
       <WeatherInfoDisplay weatherData={weatherData} />
       <h1 className='infostyle--big'>Sun times</h1>
-      <p className='infostyle--normal' onClick={() => setMetricFormat(prevMetricFormat => !prevMetricFormat)}>☀ ↑ {getTimeFromTimestampHoursMinutes(weatherData.sys.sunrise)}</p>
-      <p className='infostyle--normal' onClick={() => setMetricFormat(prevMetricFormat => !prevMetricFormat)}>☀ ↓ {getTimeFromTimestampHoursMinutes(weatherData.sys.sunset)}</p>
+      <p className='infostyle--normal' onClick={() => setMetricFormat(prevMetricFormat => !prevMetricFormat)}>☀ ↑ {GetTimeFromTimestampHoursMinutes(weatherData.sys.sunrise)}</p>
+      <p className='infostyle--normal' onClick={() => setMetricFormat(prevMetricFormat => !prevMetricFormat)}>☀ ↓ {GetTimeFromTimestampHoursMinutes(weatherData.sys.sunset)}</p>
       </div>
       : ""}
-      {isSubmitted ? <button className='wheaterbutton' onClick={getForecast}>{isForecastSucceeded ? "Reload Forecast" : "Get Forecast"}</button> : ""}
+      {isSubmitted ? <button className='wheaterbutton' onClick={GetForecast}>{isForecastSucceeded ? "Reload Forecast" : "Get Forecast"}</button> : ""}
       <div>
       {isForecastSucceeded ? 
       <div>

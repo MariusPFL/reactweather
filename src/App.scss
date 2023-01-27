@@ -7,24 +7,6 @@ $white: #ffffff;
 $cornerRadius: 8px;
 $marginTop: 20px;
 
-// Copied Style from CSS
-
-  @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-      animation: App-logo-spin infinite 20s linear;
-    }
-  }
-  
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-
 body {
     margin-top: 10px;
     display: flex;
@@ -45,14 +27,6 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
     }
-    
-    /* Own SASS Styles
-    ------------------------------------------------
-    */
-
-.TestStyle{
-    // background-color: $turkis;
-}
 
 .infostyle{
     margin-top: 10px;
