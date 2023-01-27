@@ -2,8 +2,10 @@ import logo from './logo.svg';
 import React from 'react';
 // import axios from 'axios';
 import './App.css';
+import './App.scss';
 import Navbar from './Navbar';
 import WeatherInfoDisplay from './WeatherInfoDisplay.js';
+import Select from './Select.js';
 
 
 
@@ -18,7 +20,7 @@ function App() {
   const [weatherData, setWeatherData] = React.useState();
   const [lastUpdated, setLastUpdated] = React.useState();
   const [metricFormat, setMetricFormat] = React.useState(true);
-  
+
   function changeCity(event) {
     setCityName(event.target.value);
   }
@@ -83,11 +85,12 @@ function App() {
         alert("Something went wrong: " + weatherData.cod + " " + weatherData.message);
         break;
     }
-    index = 0;
     setIsForecastActive(false);
     setIsForecastSucceeded(false);
     UpdateLastUpdated();
   }
+  
+
 
   // Obsolete
   // function findWeatherByDate(date, dataList) {
@@ -125,9 +128,8 @@ function App() {
     UpdateLastUpdated();
   }
 
-  let index = 0;
   return (
-    <div className="App">
+    <div className="TestStyle">
       <Navbar />
       {isSubmitted ? <p>Last Update: {lastUpdated}</p> : ""}
       <h4>{isSubmitted ? "" :  "Tippe deine Stadt ein"}</h4>
@@ -148,23 +150,11 @@ function App() {
       <p onClick={() => setMetricFormat(prevMetricFormat => !prevMetricFormat)}>☀ ↓ {getTimeFromTimestampHoursMinutes(weatherData.sys.sunset)}</p>
       </div>
       : ""}
-      <h2 onClick={getForecast}>Forecast</h2>
+      <h2 onClick={getForecast}>{isForecastSucceeded ? "Reload Forecast" : "Get Forecast"}</h2>
       <div>
       {isForecastSucceeded ? 
       <div>
-      <select name="forecast" id="forecast">
-        {
-          forecastData.list.map(dailyweather => {
-            // Just one entry a day should be showed
-            index++;
-            if(index % 8 == 0){
-              return(
-                <option key={dailyweather.dt} value={index}>{dailyweather.dt_txt}</option>
-                )
-              }
-            }
-        )}
-    </select>
+        <Select forecastData={forecastData}/>
     <button onClick={() => {
       if(!isForecastActive){
         setIsForecastActive(true)
@@ -172,11 +162,8 @@ function App() {
       }
       else{
         setActiveForecastIndex(document.getElementById("forecast").value);
-      }
-      }
-    }
-      >
-      {isForecastActive ?  "reload" : "show"}
+      }}}>
+      {isForecastActive ?  "choose" : "show"}
       </button>
       </div>
       : ""}
