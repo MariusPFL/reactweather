@@ -1,4 +1,5 @@
 import React from 'react';
+import WeatherImage from './WeatherImage';
 
 
 export default function WeatherInfoDisplay(props){
@@ -19,23 +20,6 @@ export default function WeatherInfoDisplay(props){
           return Math.round(speed * 0.621371192) + " mp/h";
         }
       }
-      function getTimeFromTimestamp(timestamp){
-        var date = new Date(timestamp * 1000);
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        if(metricFormat){
-          return hours + ":" + minutes;
-        }
-        else{
-          if(hours > 12){
-            hours = hours - 12;
-            return hours + ":" + minutes + " PM";
-          }
-          else{
-            return hours + ":" + minutes + " AM";
-          }
-        }
-      }
     return(
         <div>
             <h1>Weather Info</h1>
@@ -43,7 +27,8 @@ export default function WeatherInfoDisplay(props){
             <p>Temp: {inCorrectFormatTemp(props.weatherData.main.temp)} Real Feel: {inCorrectFormatTemp(props.weatherData.main.feels_like)}</p>
             <p>↓ {inCorrectFormatTemp(props.weatherData.main.temp_min)}  -  ↑ {inCorrectFormatTemp(props.weatherData.main.temp_max)}</p>
             <p>Wind: {inCorrectFormatSpeed(props.weatherData.wind.speed)} | pressure: {props.weatherData.main.pressure} | humidity: {props.weatherData.main.humidity}%</p>
-            {props.weatherData.weather[0].icon ? <img src = {props.weatherData.weather[0].icon}/> : ""}
+            <p>{props.weatherData.weather[0].main}</p>
+            <WeatherImage weatherDescription={props.weatherData.weather[0].main}/>
       </div>
     )
 }
