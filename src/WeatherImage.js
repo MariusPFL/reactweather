@@ -6,8 +6,6 @@ import RainImg from './images/rain.png';
 import Snowflake from './images/snowflake.png';
 import SunImg from './images/sun.png';
 
-
-
 export default function WeatherImage(props) {
     switch(props.weatherDescription) {
         case 'Clouds':

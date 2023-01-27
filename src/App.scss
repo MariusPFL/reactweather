@@ -27,7 +27,6 @@ $marginTop: 20px;
   .App-header {
     background-color: #282c34;
     min-height: 100vh;
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -47,10 +46,12 @@ $marginTop: 20px;
       transform: rotate(360deg);
     }
   }
-  
+
 
 body {
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
@@ -58,7 +59,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     color: $white;
     background-image: url("https://img.freepik.com/free-vector/turquoise-galaxy-background_125540-343.jpg?w=2000");
-    background-size: 100%, 100%;
+    background-size: cover;
     background-repeat: no-repeat;
     text-align: center;
 }
@@ -93,13 +94,17 @@ code {
     font-size: 45px;
 }
 
-.infostyle--normal{
-    @extend.infostyle;
-    font-size: 30px;
-}
-
 .transparentblack{
     background-color: rgba(0, 0, 0, 0.25);
+}
+
+.WheaterInfoDisplay{
+    @extend.transparentblack;
+    margin-top: $marginTop;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
 }
 
 .wheaterimage {

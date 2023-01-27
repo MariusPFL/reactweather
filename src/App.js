@@ -144,12 +144,12 @@ function App() {
       </div>
 
       <WeatherInfoDisplay weatherData={weatherData} />
-      <h1 className='infostyle--big'>Sun Times</h1>
+      <h1 className='infostyle--big'>Sun</h1>
       <p className='infostyle--normal' onClick={() => setMetricFormat(prevMetricFormat => !prevMetricFormat)}>☀ ↑ {getTimeFromTimestampHoursMinutes(weatherData.sys.sunrise)}</p>
       <p className='infostyle--normal' onClick={() => setMetricFormat(prevMetricFormat => !prevMetricFormat)}>☀ ↓ {getTimeFromTimestampHoursMinutes(weatherData.sys.sunset)}</p>
       </div>
       : ""}
-      <button className='wheaterbutton' onClick={getForecast}>{isForecastSucceeded ? "Reload Forecast" : "Get Forecast"}</button>
+      {isSubmitted ? <button className='wheaterbutton' onClick={getForecast}>{isForecastSucceeded ? "Reload Forecast" : "Get Forecast"}</button> : ""}
       <div>
       {isForecastSucceeded ? 
       <div>
