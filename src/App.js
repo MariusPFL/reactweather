@@ -1,7 +1,4 @@
-import logo from './logo.svg';
 import React from 'react';
-// import axios from 'axios';
-import './App.css';
 import './App.scss';
 import Navbar from './Navbar';
 import WeatherInfoDisplay from './WeatherInfoDisplay.js';
@@ -28,21 +25,7 @@ function App() {
   function UpdateLastUpdated(){
     setLastUpdated(getTimeFromTimestampHoursMinutes(Date.now()))
   }
-  function inCorrectFormatTemp(temp){
-    if(metricFormat){
-      return Math.round(temp - 273.15) + "°C";
-    } else{
-      return Math.round(1.8*(temp - 273) + 32) + "°F";
-    }
-  }
-  function inCorrectFormatSpeed(speed){
-    if(metricFormat){
-      return speed + " km/h";
-    }
-    else{
-      return Math.round(speed * 0.621371192) + " mp/h";
-    }
-  }
+
   function getTimeFromTimestampHoursMinutes(timestamp){
     var date = new Date(timestamp * 1000);
     var hours = date.getHours();
@@ -64,9 +47,6 @@ function App() {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + APIKEY)
     .then(res => res.json())
     .then(data => setWeatherData(data));
-    // axios.get("https://api.openweathermap.org/data/2.5/weather?" + cityName + "&APPID=8a6ffc5fc9687f07fcfaba425c3bdc66").then((response) => {
-    //   setWeatherData(JSON.stringify(response.data);
-    // })
     setIsSubmitted(false);
     switch (weatherData.cod) {
       case 200:
@@ -89,20 +69,6 @@ function App() {
     setIsForecastSucceeded(false);
     UpdateLastUpdated();
   }
-  
-
-
-  // Obsolete
-  // function findWeatherByDate(date, dataList) {
-  //   dataList.map(item => {
-  //     if(item.dt === date){
-  //       return item;
-  //     }
-  //     else{
-  //       return "nothing found";
-  //     }
-  //   })
-  // }
 
   function getForecast(){
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + APIKEY)
@@ -132,7 +98,7 @@ function App() {
     <div className="TestStyle">
       <Navbar />
       {isSubmitted ? <p>Last Update: {lastUpdated}</p> : ""}
-      <h4 className='infostyle--small'>{isSubmitted ? "" :  "Tippe deine Stadt ein"}</h4>
+      <p className='infostyle--normal'>{isSubmitted ? "" :  "Tippe deine Stadt ein"}</p>
       <input className='input' id="tbcityname" type="textbox" onChange={changeCity} value={cityName} placeholder="Enter your city here..."></input>
       <button className='wheaterbutton' onClick={getWeatherFromCity}>Search</button>
       {isSubmitted ?     
@@ -144,7 +110,7 @@ function App() {
       </div>
 
       <WeatherInfoDisplay weatherData={weatherData} />
-      <h1 className='infostyle--big'>Sun</h1>
+      <h1 className='infostyle--big'>Sun times</h1>
       <p className='infostyle--normal' onClick={() => setMetricFormat(prevMetricFormat => !prevMetricFormat)}>☀ ↑ {getTimeFromTimestampHoursMinutes(weatherData.sys.sunrise)}</p>
       <p className='infostyle--normal' onClick={() => setMetricFormat(prevMetricFormat => !prevMetricFormat)}>☀ ↓ {getTimeFromTimestampHoursMinutes(weatherData.sys.sunset)}</p>
       </div>
@@ -163,15 +129,10 @@ function App() {
         setActiveForecastIndex(document.getElementById("forecast").value);
       }}}>
       {isForecastActive ?  "choose" : "show"}
-      </button>
-      </div>
-      : ""}
+      </button></div>: ""}
     </div>
-    {isForecastSucceeded && isForecastActive ? <WeatherInfoDisplay weatherData={forecastData.list[activeForecastIndex-1]}
-      /> : ""}
+    {isForecastSucceeded && isForecastActive ? <WeatherInfoDisplay weatherData={forecastData.list[activeForecastIndex-1]}/> : ""}
     </div>
   );
 }
-
 export default App;
-
