@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.scss';
-import Navbar from './Navbar';
-import WeatherInfoDisplay from './WeatherInfoDisplay.js';
-import Select from './Select.js';
+import Navbar from './components/Navbar';
+import WeatherInfoDisplay from './components/WeatherInfoDisplay.js';
+import Select from './components/Select.js';
 
 
 

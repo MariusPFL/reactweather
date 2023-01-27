@@ -1,10 +1,10 @@
 import React from 'react';
-import CloudyImg from './images/cloudy.png';
-import FoggyImg from './images/foggy.png';
-import NotFoundImg from './images/notfound.png';
-import RainImg from './images/rain.png';
-import Snowflake from './images/snowflake.png';
-import SunImg from './images/sun.png';
+import CloudyImg from './../images/cloudy.png';
+import FoggyImg from './../images/foggy.png';
+import NotFoundImg from './../images/notfound.png';
+import RainImg from './../images/rain.png';
+import Snowflake from './../images/snowflake.png';
+import SunImg from './../images/sun.png';
 
 export default function WeatherImage(props) {
     switch(props.weatherDescription) {
