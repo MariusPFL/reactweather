@@ -64,24 +64,26 @@ function App() {
     setIsSubmitted(false);
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + APIKEY)
     .then(res => res.json())
-    .then(data => setWeatherData(data));
-    switch (weatherData.cod) {
-      case 200:
-        setIsSubmitted(true);        
-        break;
-        case 400:
-          alert("Please Check your Data");
+    .then(data => {
+      setWeatherData(data)
+      switch (data.cod) {
+        case 200:
+          setIsSubmitted(true);        
           break;
-        case 404:
-          alert("City not found");
-          break;
-          case 500:
-            alert("Something went wrong");
+          case 400:
+            alert("Please Check your Data");
             break;
-      default:
-        alert("Something went wrong: " + weatherData.cod + " " + weatherData.message);
-        break;
-    }
+          case 404:
+            alert("City not found");
+            break;
+            case 500:
+              alert("Something went wrong");
+              break;
+        default:
+          alert("Something went wrong: " + weatherData.cod + " " + weatherData.message);
+          break;
+      }
+    });
     setIsForecastActive(false);
     setIsForecastSucceeded(false);
     UpdateLastUpdated();
@@ -90,25 +92,27 @@ function App() {
   function GetForecast(){
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + APIKEY)
     .then(res => res.json())
-    .then(data => setForecastData(data));
-    switch (forecastData.cod) {
-      case "200":
-        setIsForecastSucceeded(true);        
-        break;
-        case 400:
-          alert("Please Check your Data");
+    .then(data => {
+      setForecastData(data)
+      switch (data.cod) {
+        case "200":
+          setIsForecastSucceeded(true);        
           break;
-        case 404:
-          alert("City not found");
-          break;
-          case 500:
-            alert("Something went wrong");
+          case "400":
+            alert("Please Check your Data");
             break;
-      default:
-        alert("Something went wrong: " + forecastData.cod + " " + forecastData.message);
-        break;
-    }
-    UpdateLastUpdated();
+          case "404":
+            alert("City not found");
+            break;
+            case "500":
+              alert("Something went wrong");
+              break;
+        default:
+          alert("Something went wrong: " + forecastData.cod + " " + forecastData.message);
+          break;
+      }
+      UpdateLastUpdated();
+    });
   }
 
   return (

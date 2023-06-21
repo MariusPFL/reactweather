@@ -1,5 +1,9 @@
 import React from 'react';
 
+function GetHoursFromTimestamp(timestamp){
+  var date = new Date(timestamp * 1000 - 1);
+  return date.getHours();
+}
 
 export default function Select(props){
     try {
@@ -8,9 +12,10 @@ export default function Select(props){
             <select className='input' name="forecast" id="forecast">
             {
               props.forecastData.list.map(dailyweather => {
+                // console.log(dailyweather);
                 // Just one entry a day should be showed
                 index++;
-                if(index % 8 == 0){
+                if(GetHoursFromTimestamp(dailyweather.dt) === 13){
                   return(
                     <option key={dailyweather.dt} value={index}>{dailyweather.dt_txt}</option>
                     )
